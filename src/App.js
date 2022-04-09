@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import SlotM from './SlotMachine';
+
 
 function App() {
+
+  //  without updating time
+  let newTime = new Date().toLocaleTimeString();
+  const [ctime, setCtime] = useState(newTime);
+  const UpdateTime = () => {
+    newTime = new Date().toLocaleTimeString();
+    setCtime(newTime)
+  }
+
+
+  // updating in time
+  let Time = new Date().toLocaleTimeString();
+  const [Utime, setUTime] = useState(Time);
+  const ChangeTime = () => {
+    Time = new Date().toLocaleTimeString();
+    setUTime(Time)
+  };
+  setInterval(ChangeTime, 1000);
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1 className='heading_style'>
+        🎰 welocome to
+        <span style={{ fontWeight: 'bold' }}>slot machine game</span>🎰
+      </h1>
+      <div className='slot_machine'></div>
+      <SlotM x='😄' y='😄' z='😄' />
+      <SlotM x="🥰" y="🤩" z="😍" />
+      <div className='set_time'>
+        <h1>{ctime}</h1>
+        <button onClick={UpdateTime} className='set_btn'>get time</button>
+      </div>
+      <SlotM x="🥦" y="🥦" z="🥦" />
+      <SlotM x="🍎" y="🍌" z="🍎" />
+      <div className='updating_time'>
+        {Utime}
+      </div>
+    </>
   );
 }
 
